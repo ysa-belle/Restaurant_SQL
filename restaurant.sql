@@ -1,3 +1,22 @@
+/*
+drop table Supplier;
+drop table Sells;
+drop table SpecialIngredient;
+drop table containsFoodItem;
+drop table Main;
+drop table Drink;
+drop table hasRestaurant;
+drop table Manager;
+drop table Collects;
+drop table Bill;
+drop table Pays;
+drop table Customer;
+drop table givesOrderOrder;
+drop table Waiter;
+drop table Prepares;
+drop table Chef;
+*/
+
 CREATE TABLE Supplier (
 	sid INT PRIMARY KEY,
 	name CHAR);
