@@ -1,65 +1,67 @@
+
+drop table Supplier cascade constraints;
+drop table Sells cascade constraints;
+drop table SpecialIngredient cascade constraints;
+drop table containsFoodItem cascade constraints;
+drop table Main cascade constraints;
+drop table Drink cascade constraints;
+drop table hasRestaurant cascade constraints;
+drop table Manager cascade constraints;
+drop table Collects cascade constraints;
+drop table Bill cascade constraints;
+drop table Pays cascade constraints;
+drop table Customer cascade constraints;
+drop table givesOrderOrder cascade constraints;
+drop table Waiter cascade constraints;
+drop table PreparesOrder cascade constraints;
+drop table Chef cascade constraints;
+
 /*
-drop table Supplier;
-drop table Sells;
-drop table SpecialIngredient;
-drop table containsFoodItem;
-drop table Main;
-drop table Drink;
-drop table hasRestaurant;
-drop table Manager;
-drop table Collects;
-drop table Bill;
-drop table Pays;
-drop table Customer;
-drop table givesOrderOrder;
-drop table Waiter;
-drop table Prepares;
-drop table Chef;
 */
 
 CREATE TABLE Supplier (
 	sid INT PRIMARY KEY,
-	name CHAR);
+	name CHAR(80));
 
 CREATE TABLE SpecialIngredient(
-	ingredName CHAR PRIMARY KEY,
+	ingredName CHAR(80) PRIMARY KEY,
 	weight INT);
 
 CREATE TABLE Waiter (
-	name CHAR,
+	name CHAR(80),
 	emp# INT PRIMARY KEY,
 	wage INT);
 
 CREATE TABLE Chef (
-	name CHAR,
+	name CHAR(80),
 	emp# INT PRIMARY KEY,
 	salary INT);
 
 CREATE TABLE Manager (
-	name CHAR,
+	name CHAR(80),
 	emp# INT PRIMARY KEY,
 	salary INT);
 
 CREATE TABLE Main (
-	name CHAR PRIMARY KEY,
-	nutritInfo CHAR);
+	name CHAR(80) PRIMARY KEY,
+	nutritInfo CHAR(80));
 
 CREATE TABLE Drink (
-	name CHAR PRIMARY KEY,
+	name CHAR(80) PRIMARY KEY,
 	alcoholLv INT);
 
 CREATE TABLE Bill (
 	theDate DATE,
-	addCharges INT,
+	addChar(80)ges INT,
 	invoice# INT PRIMARY KEY);
 
 CREATE TABLE Customer (
-	cname CHAR,
+	cname CHAR(80),
 	table# INT PRIMARY KEY);
 
 CREATE TABLE Sells (
 	sid INT,
-	ingredName CHAR,
+	ingredName CHAR(80),
 	price INT,
 	PRIMARY KEY (sid, ingredName),
 	FOREIGN KEY (sid) REFERENCES Supplier,
@@ -73,10 +75,10 @@ CREATE TABLE givesOrderOrder (
 	UNIQUE (table#));
 
 CREATE TABLE containsFoodItem (
-	foodName CHAR,
-	description CHAR,
+	foodName CHAR(80),
+	description CHAR(80),
 	price INT,
-	ingredName CHAR NOT NULL,
+	ingredName CHAR(80) NOT NULL,
 	order# INT,
 	PRIMARY KEY (order#, foodName),
 	FOREIGN KEY (order#) REFERENCES givesOrderOrder
@@ -85,7 +87,7 @@ CREATE TABLE containsFoodItem (
 
 CREATE TABLE hasRestaurant (
 	branch# INT PRIMARY KEY,
-	address CHAR,
+	address CHAR(80),
 	emp# INT NOT NULL,
 	FOREIGN KEY (emp#) REFERENCES Manager);
 
@@ -103,9 +105,11 @@ CREATE TABLE Pays (
 	FOREIGN KEY (invoice#) REFERENCES Bill,
 	FOREIGN KEY (table#) REFERENCES Customer);
 
-CREATE TABLE Prepares (
+CREATE TABLE PreparesOrder (
 	order# INT,
 	emp# INT,
 	PRIMARY KEY (order#, emp#),
 	FOREIGN KEY (order#) REFERENCES givesOrderOrder,
 	FOREIGN KEY (emp#) REFERENCES Chef);
+
+
