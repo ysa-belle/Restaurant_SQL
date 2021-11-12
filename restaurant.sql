@@ -2,7 +2,7 @@
 drop table Supplier cascade constraints;
 drop table Sells cascade constraints;
 drop table SpecialIngredient cascade constraints;
-drop table containsFoodItem cascade constraints;
+-- drop table containsFoodItem cascade constraints;
 drop table Main cascade constraints;
 drop table Drink cascade constraints;
 drop table hasRestaurant cascade constraints;
@@ -10,11 +10,18 @@ drop table Manager cascade constraints;
 drop table Collects cascade constraints;
 drop table Bill cascade constraints;
 drop table Pays cascade constraints;
-drop table Customer cascade constraints;
+-- drop table Customer cascade constraints;
 drop table givesOrderOrder cascade constraints;
 drop table Waiter cascade constraints;
 drop table PreparesOrder cascade constraints;
 drop table Chef cascade constraints;
+drop table CustomerR1 cascade constraints;
+drop table CustomerR2 cascade constraints;
+drop table CustomerR3 cascade constraints;
+drop table containsFoodItemR2 cascade constraints;
+drop table containsFoodItemR1 cascade constraints;
+
+drop table containsFoodItemR3 cascade constraints;
 
 /*
 */
@@ -52,13 +59,13 @@ CREATE TABLE Drink (
 
 CREATE TABLE Bill (
 	theDate DATE,
-	addChar(80)ges INT,
+	addCharges INT,
 	invoice# INT PRIMARY KEY);
 
 -- CREATE TABLE Customer (
 -- 	table# INT PRIMARY KEY,
 -- 	cname CHAR(80),
--- 	startTime TIME,
+-- 	startTime CHAR(5),
 -- 	groupSize INT,
 -- 	phone# CHAR(20));
 
@@ -101,23 +108,8 @@ CREATE TABLE Collects (
 	FOREIGN KEY (emp#) REFERENCES Manager,
 	FOREIGN KEY (invoice#) REFERENCES Bill);
 
-CREATE TABLE Pays (
-	invoice# INT,
-	table# INT,
-	PRIMARY KEY (invoice#, table#),
-	FOREIGN KEY (invoice#) REFERENCES Bill,
-	FOREIGN KEY (table#) REFERENCES Customer);
-
-CREATE TABLE PreparesOrder (
-	order# INT,
-	emp# INT,
-	PRIMARY KEY (order#, emp#),
-	FOREIGN KEY (order#) REFERENCES givesOrderOrder,
-	FOREIGN KEY (emp#) REFERENCES Chef);
-
-
 CREATE TABLE CustomerR1 (
-	cname CHAR(80) PRIMARY KEY,
+	cname CHAR(80),
 	groupSize INT,
 	phone# CHAR(20),
 	PRIMARY KEY (cname, phone#));
@@ -128,10 +120,25 @@ CREATE TABLE CustomerR2 (
 	phone# CHAR(20));
 
 CREATE TABLE CustomerR3 (
-	startTime# TIME,
+	startTime CHAR(5),
 	cname CHAR(80),
-	phone# CHAR(20)
+	phone# CHAR(20),
 	PRIMARY KEY (cname, phone#));
+
+CREATE TABLE Pays (
+	invoice# INT,
+	table# INT,
+	PRIMARY KEY (invoice#, table#),
+	FOREIGN KEY (invoice#) REFERENCES Bill,
+	FOREIGN KEY (table#) REFERENCES CustomerR2);
+
+CREATE TABLE PreparesOrder (
+	order# INT,
+	emp# INT,
+	PRIMARY KEY (order#, emp#),
+	FOREIGN KEY (order#) REFERENCES givesOrderOrder,
+	FOREIGN KEY (emp#) REFERENCES Chef);
+
 
 CREATE TABLE containsFoodItemR1 (
 	foodName CHAR(80) PRIMARY KEY,
@@ -142,7 +149,7 @@ CREATE TABLE containsFoodItemR2 (
 	price FLOAT,
 	order# INT,
 	PRIMARY KEY (foodName, order#),
-	FOREIGN KEY (order#) REFERENCES givesOrderOrder)
+	FOREIGN KEY (order#) REFERENCES givesOrderOrder);
 
 CREATE TABLE containsFoodItemR3 (
 	foodName CHAR(80) PRIMARY KEY,
