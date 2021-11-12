@@ -55,14 +55,17 @@ CREATE TABLE Bill (
 	addChar(80)ges INT,
 	invoice# INT PRIMARY KEY);
 
-CREATE TABLE Customer (
-	cname CHAR(80),
-	table# INT PRIMARY KEY);
+-- CREATE TABLE Customer (
+-- 	table# INT PRIMARY KEY,
+-- 	cname CHAR(80),
+-- 	startTime TIME,
+-- 	groupSize INT,
+-- 	phone# CHAR(20));
 
 CREATE TABLE Sells (
 	sid INT,
 	ingredName CHAR(80),
-	price INT,
+	price FLOAT,
 	PRIMARY KEY (sid, ingredName),
 	FOREIGN KEY (sid) REFERENCES Supplier,
 	FOREIGN KEY (ingredName) REFERENCES SpecialIngredient);
@@ -74,16 +77,16 @@ CREATE TABLE givesOrderOrder (
 	FOREIGN KEY (emp#) REFERENCES Waiter,
 	UNIQUE (table#));
 
-CREATE TABLE containsFoodItem (
-	foodName CHAR(80),
-	description CHAR(80),
-	price INT,
-	ingredName CHAR(80) NOT NULL,
-	order# INT,
-	PRIMARY KEY (order#, foodName),
-	FOREIGN KEY (order#) REFERENCES givesOrderOrder
-		ON DELETE CASCADE,
-	FOREIGN KEY (ingredName) REFERENCES SpecialIngredient);
+-- CREATE TABLE containsFoodItem (
+-- 	foodName CHAR(80),
+-- 	description CHAR(80),
+-- 	price INT,
+-- 	ingredName CHAR(80) NOT NULL,
+-- 	order# INT,
+-- 	PRIMARY KEY (order#, foodName),
+-- 	FOREIGN KEY (order#) REFERENCES givesOrderOrder
+-- 		ON DELETE CASCADE,
+-- 	FOREIGN KEY (ingredName) REFERENCES SpecialIngredient);
 
 CREATE TABLE hasRestaurant (
 	branch# INT PRIMARY KEY,
@@ -111,5 +114,41 @@ CREATE TABLE PreparesOrder (
 	PRIMARY KEY (order#, emp#),
 	FOREIGN KEY (order#) REFERENCES givesOrderOrder,
 	FOREIGN KEY (emp#) REFERENCES Chef);
+
+
+CREATE TABLE CustomerR1 (
+	cname CHAR(80) PRIMARY KEY,
+	groupSize INT,
+	phone# CHAR(20),
+	PRIMARY KEY (cname, phone#));
+
+CREATE TABLE CustomerR2 (
+	table# INT PRIMARY KEY,
+	cname CHAR(80),
+	phone# CHAR(20));
+
+CREATE TABLE CustomerR3 (
+	startTime# TIME,
+	cname CHAR(80),
+	phone# CHAR(20)
+	PRIMARY KEY (cname, phone#));
+
+CREATE TABLE containsFoodItemR1 (
+	foodName CHAR(80) PRIMARY KEY,
+	description CHAR(200));
+
+CREATE TABLE containsFoodItemR2 (
+	foodName CHAR(80),
+	price FLOAT,
+	order# INT,
+	PRIMARY KEY (foodName, order#),
+	FOREIGN KEY (order#) REFERENCES givesOrderOrder)
+
+CREATE TABLE containsFoodItemR3 (
+	foodName CHAR(80) PRIMARY KEY,
+	ingredName CHAR(80),
+	FOREIGN KEY (ingredName) REFERENCES SpecialIngredient);
+
+
 
 
