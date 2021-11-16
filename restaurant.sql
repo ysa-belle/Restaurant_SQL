@@ -20,7 +20,6 @@ drop table CustomerR2 cascade constraints;
 drop table CustomerR3 cascade constraints;
 drop table containsFoodItemR2 cascade constraints;
 drop table containsFoodItemR1 cascade constraints;
-
 drop table containsFoodItemR3 cascade constraints;
 
 /*
