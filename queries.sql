@@ -1,0 +1,10 @@
+-- insert
+-- delete
+-- update
+-- selection
+-- projection
+-- join
+-- Aggregation with Group By
+-- Aggregation with Having
+-- Nested Aggregation with Group By
+-- Division
