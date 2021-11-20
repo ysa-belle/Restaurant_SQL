@@ -119,8 +119,8 @@ CREATE TABLE CustomerR2 (
 	phone# CHAR(20));
 
 CREATE TABLE CustomerR3 (
-	startTime CHAR(5),
 	cname CHAR(80),
+	startTime CHAR(5),
 	phone# CHAR(20),
 	PRIMARY KEY (cname, phone#));
 
