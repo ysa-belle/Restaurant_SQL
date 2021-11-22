@@ -41,7 +41,8 @@ CREATE TABLE Waiter (
 CREATE TABLE Chef (
 	name CHAR(80),
 	empNum INT PRIMARY KEY,
-	salary INT);
+	salary INT,
+	YearsOfExp INT);
 
 CREATE TABLE Manager (
 	mname CHAR(80),
