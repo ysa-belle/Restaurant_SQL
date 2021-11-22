@@ -12,9 +12,9 @@ SELECT '$res' FROM Customer;
 -- join
 SELECT mname FROM Manager m, hasRestaurant hr WHERE m.empNum = hr.empNum AND branchNum= '$res';
 -- Aggregation with Group By (find highest/lowest/average salary of chef for each years of cooking experience)
-SELECT name, MIN/MAX/AVG(salary)
+SELECT YearsOfExp, MIN/MAX/AVG(salary)
 FROM Chef
-GROUP BY YearsOfExp
+GROUP BY YearsOfExp;
 
 -- Aggregation with Having
 -- Nested Aggregation with Group By
@@ -26,4 +26,4 @@ WHERE NOT EXIST ((SELECT si.ingredName
                 EXCEPT
                 (SELECT si.ingredName
                 FROM SpecialIngredient si, Sells s
-                WHERE si.ingredName = s.ingredName))
+                WHERE si.ingredName = s.ingredName));
