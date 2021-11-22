@@ -11,7 +11,11 @@ WHERE sid = '$res1' AND ingredName = '$res2';
 SELECT '$res' FROM Customer;
 -- join
 SELECT mname FROM Manager m, hasRestaurant hr WHERE m.empNum = hr.empNum AND branchNum= '$res';
--- Aggregation with Group By
+-- Aggregation with Group By (find highest/lowest/average salary of chef for each years of cooking experience)
+SELECT name, MIN(salary)
+FROM Chef
+GROUP BY YearsOfExp
+
 -- Aggregation with Having
 -- Nested Aggregation with Group By
 -- Division (find the supplier that provides all the special ingredients)
