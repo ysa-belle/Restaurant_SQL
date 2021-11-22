@@ -13,7 +13,7 @@ drop table Pays cascade constraints;
 -- drop table Customer cascade constraints;
 drop table givesOrderOrder cascade constraints;
 drop table Waiter cascade constraints;
-drop table PreparesOrder cascade constraints;
+drop table Prepares cascade constraints;
 drop table Chef cascade constraints;
 drop table CustomerR1 cascade constraints;
 drop table CustomerR2 cascade constraints;
@@ -35,17 +35,17 @@ CREATE TABLE SpecialIngredient(
 
 CREATE TABLE Waiter (
 	name CHAR(80),
-	emp# INT PRIMARY KEY,
+	empNum INT PRIMARY KEY,
 	wage INT);
 
 CREATE TABLE Chef (
 	name CHAR(80),
-	emp# INT PRIMARY KEY,
+	empNum INT PRIMARY KEY,
 	salary INT);
 
 CREATE TABLE Manager (
 	name CHAR(80),
-	emp# INT PRIMARY KEY,
+	empNum INT PRIMARY KEY,
 	salary INT);
 
 CREATE TABLE Main (
@@ -59,14 +59,14 @@ CREATE TABLE Drink (
 CREATE TABLE Bill (
 	theDate DATE,
 	addCharges INT,
-	invoice# INT PRIMARY KEY);
+	invoiceNum INT PRIMARY KEY);
 
 -- CREATE TABLE Customer (
--- 	table# INT PRIMARY KEY,
+-- 	tableNum INT PRIMARY KEY,
 -- 	cname CHAR(80),
 -- 	startTime CHAR(5),
 -- 	groupSize INT,
--- 	phone# CHAR(20));
+-- 	phoneNum CHAR(20));
 
 CREATE TABLE Sells (
 	sid INT,
@@ -77,66 +77,66 @@ CREATE TABLE Sells (
 	FOREIGN KEY (ingredName) REFERENCES SpecialIngredient);
 
 CREATE TABLE givesOrderOrder (
-	order# INT PRIMARY KEY,
-	emp# INT,
-	table# INT,
-	FOREIGN KEY (emp#) REFERENCES Waiter,
-	UNIQUE (table#));
+	orderNum INT PRIMARY KEY,
+	empNum INT,
+	tableNum INT,
+	FOREIGN KEY (empNum) REFERENCES Waiter,
+	UNIQUE (tableNum));
 
 -- CREATE TABLE containsFoodItem (
 -- 	foodName CHAR(80),
 -- 	description CHAR(80),
 -- 	price INT,
 -- 	ingredName CHAR(80) NOT NULL,
--- 	order# INT,
--- 	PRIMARY KEY (order#, foodName),
--- 	FOREIGN KEY (order#) REFERENCES givesOrderOrder
+-- 	orderNum INT,
+-- 	PRIMARY KEY (orderNum, foodName),
+-- 	FOREIGN KEY (orderNum) REFERENCES givesOrderOrder
 -- 		ON DELETE CASCADE,
 -- 	FOREIGN KEY (ingredName) REFERENCES SpecialIngredient);
 
 CREATE TABLE hasRestaurant (
-	branch# INT PRIMARY KEY,
+	branchNum INT PRIMARY KEY,
 	address CHAR(80),
-	emp# INT NOT NULL,
-	FOREIGN KEY (emp#) REFERENCES Manager);
+	empNum INT NOT NULL,
+	FOREIGN KEY (empNum) REFERENCES Manager);
 
 CREATE TABLE Collects (
-	emp# INT,
-	invoice# INT,
-	PRIMARY KEY (emp#, invoice#),
-	FOREIGN KEY (emp#) REFERENCES Manager,
-	FOREIGN KEY (invoice#) REFERENCES Bill);
+	empNum INT,
+	invoiceNum INT,
+	PRIMARY KEY (empNum, invoiceNum),
+	FOREIGN KEY (empNum) REFERENCES Manager,
+	FOREIGN KEY (invoiceNum) REFERENCES Bill);
 
 CREATE TABLE CustomerR1 (
 	cname CHAR(80),
 	groupSize INT,
-	phone# CHAR(20),
-	PRIMARY KEY (cname, phone#));
+	phoneNum CHAR(20),
+	PRIMARY KEY (cname, phoneNum));
 
 CREATE TABLE CustomerR2 (
-	table# INT PRIMARY KEY,
+	tableNum INT PRIMARY KEY,
 	cname CHAR(80),
-	phone# CHAR(20));
+	phoneNum CHAR(20));
 
 CREATE TABLE CustomerR3 (
 	cname CHAR(80),
 	startTime CHAR(5),
-	phone# CHAR(20),
-	PRIMARY KEY (cname, phone#));
+	phoneNum CHAR(20),
+	PRIMARY KEY (cname, phoneNum));
 
 CREATE TABLE Pays (
-	invoice# INT,
-	table# INT,
-	PRIMARY KEY (invoice#, table#),
-	FOREIGN KEY (invoice#) REFERENCES Bill,
-	FOREIGN KEY (table#) REFERENCES CustomerR2);
+	invoiceNum INT,
+	tableNum INT,
+	PRIMARY KEY (invoiceNum, tableNum),
+	FOREIGN KEY (invoiceNum) REFERENCES Bill,
+	FOREIGN KEY (tableNum) REFERENCES CustomerR2);
 
-CREATE TABLE PreparesOrder (
-	order# INT,
-	emp# INT,
-	PRIMARY KEY (order#, emp#),
-	FOREIGN KEY (order#) REFERENCES givesOrderOrder,
-	FOREIGN KEY (emp#) REFERENCES Chef);
+CREATE TABLE Prepares (
+	orderNum INT,
+	empNum INT,
+	PRIMARY KEY (orderNum, empNum),
+	FOREIGN KEY (orderNum) REFERENCES givesOrderOrder ON DELETE CASCADE,
+	FOREIGN KEY (empNum) REFERENCES Chef);
 
 
 CREATE TABLE containsFoodItemR1 (
@@ -146,9 +146,9 @@ CREATE TABLE containsFoodItemR1 (
 CREATE TABLE containsFoodItemR2 (
 	foodName CHAR(80),
 	price FLOAT,
-	order# INT,
-	PRIMARY KEY (foodName, order#),
-	FOREIGN KEY (order#) REFERENCES givesOrderOrder);
+	orderNum INT,
+	PRIMARY KEY (foodName, orderNum),
+	FOREIGN KEY (orderNum) REFERENCES givesOrderOrder ON DELETE CASCADE);
 
 CREATE TABLE containsFoodItemR3 (
 	foodName CHAR(80) PRIMARY KEY,

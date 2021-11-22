@@ -41,7 +41,7 @@ INSERT INTO Manager VALUES ('Johnny', 77, 4000);
 INSERT INTO Manager VALUES ('Jason', 88, 4000);
 
 INSERT INTO Sells VALUES (1234, 'Chicken Wings', 199.99);
-INSERT INTO Sells VALUES (1235, 'Pork Chops', 249.99);
+INSERT INTO Sells VALUES (1234, 'Pork Chops', 249.99);
 INSERT INTO Sells VALUES (1236, 'Salmon', 329.49);
 INSERT INTO Sells VALUES (1237, 'Ribeye', 399.99);
 INSERT INTO Sells VALUES (1238, 'Broccoli', 429.19);
@@ -114,8 +114,8 @@ INSERT INTO containsFoodItemR2 VALUES ('ribeye steak', 20, 115);
 INSERT INTO containsFoodItemR2 VALUES ('Jim''s surprise', 10, 116);
 INSERT INTO containsFoodItemR2 VALUES ('ribeye steak', 20, 116);
 
-INSERT INTO preparesOrder VALUES (112, 1333);
-INSERT INTO preparesOrder VALUES (113, 1344);
-INSERT INTO preparesOrder VALUES (114, 1355);
-INSERT INTO preparesOrder VALUES (115, 1366);
-INSERT INTO preparesOrder VALUES (116, 1377);
+INSERT INTO Prepares VALUES (112, 1333);
+INSERT INTO Prepares VALUES (113, 1344);
+INSERT INTO Prepares VALUES (114, 1355);
+INSERT INTO Prepares VALUES (115, 1366);
+INSERT INTO Prepares VALUES (116, 1377);
