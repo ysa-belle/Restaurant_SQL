@@ -12,7 +12,7 @@ SELECT '$res' FROM Customer;
 -- join
 SELECT mname FROM Manager m, hasRestaurant hr WHERE m.empNum = hr.empNum AND branchNum= '$res';
 -- Aggregation with Group By (find highest/lowest/average salary of chef for each years of cooking experience)
-SELECT name, MIN(salary)
+SELECT name, MIN/MAX/AVG(salary)
 FROM Chef
 GROUP BY YearsOfExp
 
