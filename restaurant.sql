@@ -10,14 +10,14 @@ drop table Manager cascade constraints;
 drop table Collects cascade constraints;
 drop table Bill cascade constraints;
 drop table Pays cascade constraints;
--- drop table Customer cascade constraints;
+drop table Customer cascade constraints;
 drop table givesOrderOrder cascade constraints;
 drop table Waiter cascade constraints;
 drop table Prepares cascade constraints;
 drop table Chef cascade constraints;
-drop table CustomerR1 cascade constraints;
-drop table CustomerR2 cascade constraints;
-drop table CustomerR3 cascade constraints;
+-- drop table CustomerR1 cascade constraints;
+-- drop table CustomerR2 cascade constraints;
+-- drop table CustomerR3 cascade constraints;
 drop table containsFoodItemR2 cascade constraints;
 drop table containsFoodItemR1 cascade constraints;
 drop table containsFoodItemR3 cascade constraints;
@@ -44,7 +44,7 @@ CREATE TABLE Chef (
 	salary INT);
 
 CREATE TABLE Manager (
-	name CHAR(80),
+	mname CHAR(80),
 	empNum INT PRIMARY KEY,
 	salary INT);
 
@@ -61,13 +61,6 @@ CREATE TABLE Bill (
 	addCharges INT,
 	invoiceNum INT PRIMARY KEY);
 
--- CREATE TABLE Customer (
--- 	tableNum INT PRIMARY KEY,
--- 	cname CHAR(80),
--- 	startTime CHAR(5),
--- 	groupSize INT,
--- 	phoneNum CHAR(20));
-
 CREATE TABLE Sells (
 	sid INT,
 	ingredName CHAR(80),
@@ -80,8 +73,9 @@ CREATE TABLE givesOrderOrder (
 	orderNum INT PRIMARY KEY,
 	empNum INT,
 	tableNum INT,
+    startTime CHAR(5),
 	FOREIGN KEY (empNum) REFERENCES Waiter,
-	UNIQUE (tableNum));
+	UNIQUE (tableNum, startTime));
 
 -- CREATE TABLE containsFoodItem (
 -- 	foodName CHAR(80),
@@ -107,29 +101,39 @@ CREATE TABLE Collects (
 	FOREIGN KEY (empNum) REFERENCES Manager,
 	FOREIGN KEY (invoiceNum) REFERENCES Bill);
 
-CREATE TABLE CustomerR1 (
-	cname CHAR(80),
-	groupSize INT,
-	phoneNum CHAR(20),
-	PRIMARY KEY (cname, phoneNum));
-
-CREATE TABLE CustomerR2 (
-	tableNum INT PRIMARY KEY,
-	cname CHAR(80),
-	phoneNum CHAR(20));
-
-CREATE TABLE CustomerR3 (
+    
+CREATE TABLE Customer (
+	tableNum INT,
 	cname CHAR(80),
 	startTime CHAR(5),
+	groupSize INT,
 	phoneNum CHAR(20),
-	PRIMARY KEY (cname, phoneNum));
+    PRIMARY KEY (tableNum, startTime));
+
+-- CREATE TABLE CustomerR1 (
+-- 	cname CHAR(80),
+-- 	groupSize INT,
+-- 	phoneNum CHAR(20),
+-- 	PRIMARY KEY (cname, phoneNum));
+
+-- CREATE TABLE CustomerR2 (
+-- 	tableNum INT PRIMARY KEY,
+-- 	cname CHAR(80),
+-- 	phoneNum CHAR(20));
+
+-- CREATE TABLE CustomerR3 (
+-- 	cname CHAR(80),
+-- 	startTime CHAR(5),
+-- 	phoneNum CHAR(20),
+-- 	PRIMARY KEY (cname, phoneNum));
 
 CREATE TABLE Pays (
 	invoiceNum INT,
 	tableNum INT,
-	PRIMARY KEY (invoiceNum, tableNum),
+    startTime CHAR(5),
+	PRIMARY KEY (invoiceNum, tableNum, startTime),
 	FOREIGN KEY (invoiceNum) REFERENCES Bill,
-	FOREIGN KEY (tableNum) REFERENCES CustomerR2);
+	FOREIGN KEY (tableNum, startTime) REFERENCES Customer);
 
 CREATE TABLE Prepares (
 	orderNum INT,

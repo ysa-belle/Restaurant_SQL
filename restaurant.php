@@ -61,6 +61,18 @@
 
     <hr />
 
+
+    <h2>Join: find manager name given restaurant branch number</h2>
+
+        <form method="POST" action="restaurant.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="joinQueryRequest" name="joinQueryRequest">
+            branch number: <input type="text" name="bno"> <br /><br />
+
+            <input type="submit" value="Join" name="joinSubmit"></p>
+        </form>
+
+    <hr />
+
  
 
 
@@ -216,6 +228,32 @@
             OCICommit($db_conn);
         }
 
+        function printResult($result) { 
+            echo "<table>";
+            echo "<tr><th>mname</th></tr>";
+
+            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+                echo "<tr><td>" . $row["mname"] . "</td></tr>"; //or just use "echo $row[0]" 
+            }
+
+            echo "</table>";
+        }
+
+        function handleJoinRequest() {
+            global $db_conn;
+
+            $res = $_POST['bno'];
+
+            $result = executePlainSQL("SELECT mname FROM Manager m, hasRestaurant hr WHERE m.empNum = hr.empNum AND branchNum= '$res'");
+            // echo $result;
+            printResult($result);
+
+            OCICommit($db_conn);
+        }
+
+
+
+
 
 
         // HANDLE ALL POST ROUTES
@@ -228,6 +266,8 @@
                     handleDeleteRequest();
                 } else if (array_key_exists('updateQueryRequest', $_POST)) {
                     handleUpdateRequest();
+                } else if (array_key_exists('joinQueryRequest', $_POST)) {
+                    handleJoinRequest();
                 } 
 
                 disconnectFromDB();
@@ -236,7 +276,8 @@
 
 
 
-		if (isset($_POST['insertSubmit']) || isset($_POST['deleteSubmit']) || isset($_POST['updateSubmit'])) {
+		if (isset($_POST['insertSubmit']) || isset($_POST['deleteSubmit']) || isset($_POST['updateSubmit'])
+            || isset($_POST['joinSubmit'])) {
             handlePOSTRequest();
         } 
 		?>

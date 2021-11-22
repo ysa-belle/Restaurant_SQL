@@ -52,23 +52,11 @@ INSERT INTO Collects VALUES (1233, 3);
 INSERT INTO Collects VALUES (1233, 4);
 INSERT INTO Collects VALUES (1233, 5);
 
-INSERT INTO CustomerR1 VALUES ('Bob', 2, '1234567890');
-INSERT INTO CustomerR1 VALUES ('Bobby', 2, '2345678901');
-INSERT INTO CustomerR1 VALUES ('Bobbette', 3, '3456789012');
-INSERT INTO CustomerR1 VALUES ('Bobnathon', 4, '4567890123');
-INSERT INTO CustomerR1 VALUES ('Bobu', 5, '5678901234');
-
-INSERT INTO CustomerR2 VALUES (100, 'Bob', '1234567890');
-INSERT INTO CustomerR2 VALUES (200, 'Bobby', '2345678901');
-INSERT INTO CustomerR2 VALUES (300, 'Bobbette', '3456789012');
-INSERT INTO CustomerR2 VALUES (400, 'Bobnathon', '4567890123');
-INSERT INTO CustomerR2 VALUES (500, 'Bobu', '5678901234');
-
-INSERT INTO CustomerR3 VALUES ('Bob', '9:00', '1234567890');
-INSERT INTO CustomerR3 VALUES ('Bobby', '9:00', '2345678901');
-INSERT INTO CustomerR3 VALUES ('Bobbette', '9:00', '3456789012');
-INSERT INTO CustomerR3 VALUES ('Bobnathon', '9:00', '4567890123');
-INSERT INTO CustomerR3 VALUES ('Bobu', '10:00', '5678901234');
+INSERT INTO Customer VALUES (100, 'Bob', '9:00', 2, '1234567890');
+INSERT INTO Customer VALUES (200, 'Bobby', '9:00', 2, '2345678901');
+INSERT INTO Customer VALUES (300, 'Bobbette', '9:00', 3, '3456789012');
+INSERT INTO Customer VALUES (400, 'Bobnathon', '9:00', 4, '4567890123');
+INSERT INTO Customer VALUES (500, 'Bobu', '10:00', 5, '5678901234');
 
 INSERT INTO Drink VALUES ('lady mary', 8);
 INSERT INTO Drink VALUES ('gin gin', 20);
@@ -76,11 +64,11 @@ INSERT INTO Drink VALUES ('apple juice', 5);
 INSERT INTO Drink VALUES ('coke', 0);
 INSERT INTO Drink VALUES ('tiger bomb', 12);
 
-INSERT INTO Pays VALUES (1, 100);
-INSERT INTO Pays VALUES (2, 200);
-INSERT INTO Pays VALUES (3, 300);
-INSERT INTO Pays VALUES (4, 400);
-INSERT INTO Pays VALUES (5, 500);
+INSERT INTO Pays VALUES (1, 100, '9:00');
+INSERT INTO Pays VALUES (2, 200, '9:00');
+INSERT INTO Pays VALUES (3, 300, '9:00');
+INSERT INTO Pays VALUES (4, 400, '9:00');
+INSERT INTO Pays VALUES (5, 500, '10:00');
 
 INSERT INTO hasRestaurant VALUES (11, 'happy rd', 1233);
 INSERT INTO hasRestaurant VALUES (22, 'unhappy rd', 1233);
@@ -101,11 +89,11 @@ INSERT INTO containsFoodItemR3 VALUES ('baked salmon', 'Salmon');
 INSERT INTO containsFoodItemR3 VALUES ('ribeye steak', 'Ribeye');
 INSERT INTO containsFoodItemR3 VALUES ('Jim''s surprise', 'Broccoli');
 
-INSERT INTO givesOrderOrder VALUES (112, 1433, 100);
-INSERT INTO givesOrderOrder VALUES (113, 1433, 200);
-INSERT INTO givesOrderOrder VALUES (114, 1433, 300);
-INSERT INTO givesOrderOrder VALUES (115, 1466, 400);
-INSERT INTO givesOrderOrder VALUES (116, 1477, 500);
+INSERT INTO givesOrderOrder VALUES (112, 1433, 100, '9:00');
+INSERT INTO givesOrderOrder VALUES (113, 1433, 200, '9:00');
+INSERT INTO givesOrderOrder VALUES (114, 1433, 300, '9:00');
+INSERT INTO givesOrderOrder VALUES (115, 1466, 400, '9:00');
+INSERT INTO givesOrderOrder VALUES (116, 1477, 500, '10:00');
 
 INSERT INTO containsFoodItemR2 VALUES ('bob wings', 10, 112);
 INSERT INTO containsFoodItemR2 VALUES ('Steak', 20, 113);
