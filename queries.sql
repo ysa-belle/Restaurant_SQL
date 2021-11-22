@@ -14,4 +14,12 @@ SELECT mname FROM Manager m, hasRestaurant hr WHERE m.empNum = hr.empNum AND bra
 -- Aggregation with Group By
 -- Aggregation with Having
 -- Nested Aggregation with Group By
--- Division
+-- Division (find the supplier that provides all the special ingredients)
+SELECT s.sid
+FROM sells s
+WHERE NOT EXIST ((SELECT si.ingredName
+                FROM SpecialIngredient si)
+                EXCEPT
+                (SELECT si.ingredName
+                FROM SpecialIngredient si, Sells s
+                WHERE si.ingredName = s.ingredName))
