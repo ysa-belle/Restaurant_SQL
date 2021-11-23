@@ -53,8 +53,8 @@
             <input type="hidden" id="updateQueryRequest" name="updateQueryRequest">
             Supplier ID: <input type="text" name="id"> <br /><br />
             Ingredient Name: <input type="text" name="iName"> <br /><br />
-            New Price: <input type="number" step="0.01" name="price"> <br /><br />
-            <!-- New Price: <input type="text" name="newPrice"> <br /><br /> -->
+            <!-- New Price: <input type="number" step="0.01" name="price"> <br /><br /> -->
+            New Price: <input type="text" name="newPrice"> <br /><br />
 
             <input type="submit" value="Update" name="updateSubmit"></p>
         </form>
@@ -69,6 +69,23 @@
             branch number: <input type="text" name="bno"> <br /><br />
 
             <input type="submit" value="Join" name="joinSubmit"></p>
+        </form>
+
+    <hr />
+
+
+    <h2>Project</h2>
+
+        <form method="POST" action="restaurant.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="projectQueryRequest" name="projectQueryRequest">
+            project on:  <select name="projectSubmit">
+                        <option value="">Select...</option>
+                        <option value="cname">Customer Name</option>
+                        <option value="tableno">Table number</option>
+                        <option value="startTime">Start time</option>
+                        <option value="groupSize">Group Size</option>
+                        <option value="phoneNo">Phone number</option>
+                        </select>
         </form>
 
     <hr />
@@ -219,36 +236,42 @@
             $res1 = $_POST['id'];
             $res2 = $_POST['iName'];
             $res3 = $_POST['newPrice'];
+            $res3 = (float) $res3;
 
-            // executePlainSQL("UPDATE Sells SET price = '$res3' WHERE sid = '$res1' AND ingredName = '" . $res2 . "'");
-            // executePlainSQL("UPDATE Sells SET ingredName = '" . $res2 . "' WHERE sid = '$res1'");
-            // executePlainSQL("UPDATE Sells SET price = '$res3' WHERE ingredName = '" . $res2 . "'");
-            executePlainSQL("UPDATE Sells SET price = '$res3' WHERE sid = '$res1'");
-
+            executePlainSQL("UPDATE Sells SET price = $res3 WHERE sid = $res1 AND ingredName = '$res2'");
             OCICommit($db_conn);
         }
 
         function printResult($result) { 
             echo "<table>";
-            echo "<tr><th>mname</th></tr>";
+            echo "<tr><th>manager name</th></tr>";
 
             while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
-                echo "<tr><td>" . $row["mname"] . "</td></tr>"; //or just use "echo $row[0]" 
+                echo "<tr><td>" . $row[0] . "</td></tr>"; //or just use "echo $row[0]" 
             }
 
             echo "</table>";
         }
 
+
         function handleJoinRequest() {
             global $db_conn;
 
             $res = $_POST['bno'];
+            $res = intval($res);
 
-            $result = executePlainSQL("SELECT mname FROM Manager m, hasRestaurant hr WHERE m.empNum = hr.empNum AND branchNum= '$res'");
-            // echo $result;
+            $result = executePlainSQL("SELECT mname FROM Manager m, hasRestaurant hr WHERE m.empNum = hr.empNum AND branchNum= $res");
             printResult($result);
-
             OCICommit($db_conn);
+        }
+
+        function handleProjectRequest() {
+            global $db_conn;
+
+            $res = $_POST['projectSubmit'];
+
+            $result = executePlainSQL("SELECT '$res' FROM Customer");
+            printResult($result);
         }
 
 
@@ -268,6 +291,8 @@
                     handleUpdateRequest();
                 } else if (array_key_exists('joinQueryRequest', $_POST)) {
                     handleJoinRequest();
+                } else if (array_key_exists('projectQueryRequest', $_POST)) {
+                    handleProjectRequest();
                 } 
 
                 disconnectFromDB();
@@ -277,7 +302,7 @@
 
 
 		if (isset($_POST['insertSubmit']) || isset($_POST['deleteSubmit']) || isset($_POST['updateSubmit'])
-            || isset($_POST['joinSubmit'])) {
+            || isset($_POST['joinSubmit']) || isset($_POST['projectSubmit'])) {
             handlePOSTRequest();
         } 
 		?>

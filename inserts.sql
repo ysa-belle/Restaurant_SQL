@@ -74,7 +74,9 @@ INSERT INTO hasRestaurant VALUES (11, 'happy rd', 1233);
 INSERT INTO hasRestaurant VALUES (22, 'unhappy rd', 1233);
 INSERT INTO hasRestaurant VALUES (33, 'sad rd', 1233);
 INSERT INTO hasRestaurant VALUES (44, 'excited ave', 1233);
-INSERT INTO hasRestaurant VALUES (55, 'angry rd', 1233);
+INSERT INTO hasRestaurant VALUES (45, 'angry rd', 1233);
+INSERT INTO hasRestaurant VALUES (46, 'confused rd', 55);
+INSERT INTO hasRestaurant VALUES (47, 'scared rd', 55);
 
 
 INSERT INTO containsFoodItemR1 VALUES ('bob wings', 'it has chicken');

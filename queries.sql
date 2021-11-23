@@ -1,23 +1,37 @@
 -- insert
 INSERT INTO Supplier VALUES ('$b1', '$b2');
+
+
 -- delete
 DELETE FROM givesOrderOrder WHERE order# = '$res';
+
+
 -- update
 UPDATE Sells
 SET price = '$res3'
 WHERE sid = '$res1' AND ingredName = '$res2';
+
+
 -- selection
 -- projection
 SELECT '$res' FROM Customer;
--- join
-SELECT mname FROM Manager m, hasRestaurant hr WHERE m.empNum = hr.empNum AND branchNum= '$res';
+
+
+-- join (find manager name given restaurant branch number)
+SELECT mname FROM Manager m, hasRestaurant hr WHERE m.empNum = hr.empNum AND branchNum= $res;
+
+
 -- Aggregation with Group By (find highest/lowest/average salary of chef for each years of cooking experience)
 SELECT YearsOfExp, MIN/MAX/AVG(salary)
 FROM Chef
 GROUP BY YearsOfExp;
 
--- Aggregation with Having
+
+-- Aggregation with Having (find )
 -- Nested Aggregation with Group By
+
+
+
 -- Division (find the supplier that provides all the special ingredients)
 SELECT s.sid
 FROM sells s
