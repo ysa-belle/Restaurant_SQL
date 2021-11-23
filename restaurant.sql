@@ -47,7 +47,8 @@ CREATE TABLE Chef (
 CREATE TABLE Manager (
 	mname CHAR(80),
 	empNum INT PRIMARY KEY,
-	salary INT);
+	salary INT,
+	yrPromoted INT);
 
 CREATE TABLE Main (
 	name CHAR(80) PRIMARY KEY,
@@ -91,7 +92,8 @@ CREATE TABLE givesOrderOrder (
 
 CREATE TABLE hasRestaurant (
 	branchNum INT PRIMARY KEY,
-	address CHAR(80),
+	streetAddress CHAR(80),
+	city CHAR(80),
 	empNum INT NOT NULL,
 	FOREIGN KEY (empNum) REFERENCES Manager);
 

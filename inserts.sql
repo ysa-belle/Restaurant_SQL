@@ -34,11 +34,11 @@ INSERT INTO Bill VALUES (TO_DATE('11/10/2021', 'DD/MM/YYYY'), 20, 3);
 INSERT INTO Bill VALUES (TO_DATE('11/10/2021', 'DD/MM/YYYY'), 2, 4);
 INSERT INTO Bill VALUES (TO_DATE('12/10/2021', 'DD/MM/YYYY'), 20, 5);
 
-INSERT INTO Manager VALUES ('Jim', 1233, 4000);
-INSERT INTO Manager VALUES ('Jimmy', 55, 4000);
-INSERT INTO Manager VALUES ('John', 66, 4000);
-INSERT INTO Manager VALUES ('Johnny', 77, 4000);
-INSERT INTO Manager VALUES ('Jason', 88, 4000);
+INSERT INTO Manager VALUES ('Jim', 1233, 4000, 2021);
+INSERT INTO Manager VALUES ('Jimmy', 55, 4000, 2020);
+INSERT INTO Manager VALUES ('John', 66, 4000, 2020);
+INSERT INTO Manager VALUES ('Johnny', 77, 4000, 2015);
+INSERT INTO Manager VALUES ('Jason', 88, 4000, 2016);
 
 INSERT INTO Sells VALUES (1234, 'Chicken Wings', 199.99);
 INSERT INTO Sells VALUES (1234, 'Pork Chops', 249.99);
@@ -70,13 +70,13 @@ INSERT INTO Pays VALUES (3, 300, '9:00');
 INSERT INTO Pays VALUES (4, 400, '9:00');
 INSERT INTO Pays VALUES (5, 500, '10:00');
 
-INSERT INTO hasRestaurant VALUES (11, 'happy rd', 1233);
-INSERT INTO hasRestaurant VALUES (22, 'unhappy rd', 1233);
-INSERT INTO hasRestaurant VALUES (33, 'sad rd', 1233);
-INSERT INTO hasRestaurant VALUES (44, 'excited ave', 1233);
-INSERT INTO hasRestaurant VALUES (45, 'angry rd', 1233);
-INSERT INTO hasRestaurant VALUES (46, 'confused rd', 55);
-INSERT INTO hasRestaurant VALUES (47, 'scared rd', 55);
+INSERT INTO hasRestaurant VALUES (11, 'happy rd', 'Richmond', 1233);
+INSERT INTO hasRestaurant VALUES (22, 'unhappy rd','Richmond', 1233);
+INSERT INTO hasRestaurant VALUES (33, 'sad rd', 'Vancouver',1233);
+INSERT INTO hasRestaurant VALUES (44, 'excited ave', 'Surrey', 1233);
+INSERT INTO hasRestaurant VALUES (45, 'angry rd', 'Surrey', 1233);
+INSERT INTO hasRestaurant VALUES (46, 'confused rd', 'Surrey', 55);
+INSERT INTO hasRestaurant VALUES (47, 'scared rd', 'Vancouver', 55);
 
 
 INSERT INTO containsFoodItemR1 VALUES ('bob wings', 'it has chicken');

@@ -27,7 +27,14 @@ FROM Chef
 GROUP BY YearsOfExp;
 
 
--- Aggregation with Having (find )
+-- Aggregation with Having (find the most recent year a manager was promoted after 2017 for each city with 2 branches)
+SELECT city, max(yrPromoted)
+FROM hasRestaurant hr, manager m
+WHERE hr.empNum = m.empNum AND yrPromoted > 2017
+GROUP BY city
+HAVING COUNT(*) = 2;
+
+
 -- Nested Aggregation with Group By
 
 
@@ -35,7 +42,7 @@ GROUP BY YearsOfExp;
 -- Division (find the supplier that provides all the special ingredients)
 SELECT s.sid
 FROM sells s
-WHERE NOT EXIST ((SELECT si.ingredName
+WHERE NOT EXISTS ((SELECT si.ingredName
                 FROM SpecialIngredient si)
                 EXCEPT
                 (SELECT si.ingredName
