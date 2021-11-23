@@ -42,7 +42,7 @@ CREATE TABLE Chef (
 	name CHAR(80),
 	empNum INT PRIMARY KEY,
 	salary INT,
-	YearsOfExp INT);
+	yearsOfExp INT);
 
 CREATE TABLE Manager (
 	mname CHAR(80),

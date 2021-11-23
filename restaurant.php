@@ -78,14 +78,31 @@
 
         <form method="POST" action="restaurant.php"> <!--refresh page when submitted-->
             <input type="hidden" id="projectQueryRequest" name="projectQueryRequest">
-            project on:  <select name="projectSubmit">
+            project on:  <select name="projection">
                         <option value="">Select...</option>
                         <option value="cname">Customer Name</option>
-                        <option value="tableno">Table number</option>
+                        <option value="tableNum">Table number</option>
                         <option value="startTime">Start time</option>
                         <option value="groupSize">Group Size</option>
-                        <option value="phoneNo">Phone number</option>
+                        <option value="phoneNum">Phone number</option>
                         </select>
+            <input type="submit" value="Project" name="projectSubmit"></p>
+        </form>
+
+    <hr />
+
+
+    <h2>Aggregation with GROUP BY</h2>
+        <form method="POST" action="restaurant.php"> <!--refresh page when submitted-->
+            <input type="hidden" id="groupByQueryRequest" name="groupByQueryRequest">
+            <p>find the  <select name="groupBy">
+                        <option value="">Select...</option>
+                        <option value="MAX">highest</option>
+                        <option value="MIN">lowest</option>
+                        <option value="AVG">average</option>
+                        </select>
+            salary of chef for each years of cooking experience</p>
+            <input type="submit" value="GroupBy" name="groupBySubmit"></p>
         </form>
 
     <hr />
@@ -268,10 +285,35 @@
         function handleProjectRequest() {
             global $db_conn;
 
-            $res = $_POST['projectSubmit'];
+            $res = $_POST['projection'];
 
-            $result = executePlainSQL("SELECT '$res' FROM Customer");
+            $result = executePlainSQL("SELECT $res FROM Customer");
             printResult($result);
+        }
+
+
+        function printGroupByResult($result) { //prints results from a select statement
+            echo "<br>Retrieved data from table demoTable:<br>";
+            echo "<table>";
+            echo "<tr><th>ID</th><th>Name</th></tr>";
+
+            while ($row = OCI_Fetch_Array($result, OCI_BOTH)) {
+                echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td></tr>"; //or just use "echo $row[0]" 
+            }
+
+            echo "</table>";
+        }
+
+
+        function handleGroupByRequest() {
+            global $db_conn;
+
+            $res = $_POST['groupBy'];
+            // $res .= "(salary)";
+            echo $res;
+
+            $result = executePlainSQL("SELECT YearsOfExp, '$res' FROM Chef GROUP BY yearsOfExp");
+            printGroupByResult($result);
         }
 
 
@@ -293,6 +335,8 @@
                     handleJoinRequest();
                 } else if (array_key_exists('projectQueryRequest', $_POST)) {
                     handleProjectRequest();
+                } else if (array_key_exists('groupByQueryRequest', $_POST)) {
+                    handleGroupByRequest();
                 } 
 
                 disconnectFromDB();
@@ -302,7 +346,7 @@
 
 
 		if (isset($_POST['insertSubmit']) || isset($_POST['deleteSubmit']) || isset($_POST['updateSubmit'])
-            || isset($_POST['joinSubmit']) || isset($_POST['projectSubmit'])) {
+            || isset($_POST['joinSubmit']) || isset($_POST['projectSubmit']) || isset($_POST['groupBySubmit'])) {
             handlePOSTRequest();
         } 
 		?>
